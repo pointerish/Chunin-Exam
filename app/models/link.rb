@@ -9,6 +9,13 @@ class ValidUrlValidator < ActiveModel::EachValidator
 end
 
 class Link < ApplicationRecord
+  after_save :set_short_url_id
+
   include Hashid::Rails
   validates :url, presence: true, valid_url: true
+
+  private
+    def set_short_url_id
+      self.short_url = self.hashid
+    end
 end
