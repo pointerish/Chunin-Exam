@@ -6,9 +6,7 @@ class LinksController < ApplicationController
 
   def show
     link = Link.find_by_hashid(params[:hashid])
-    #DO ALL TRACKING HERE
-    link.click_count += 1
-    link.save
+    link.track(request)
     redirect_to link.url
   end
 
