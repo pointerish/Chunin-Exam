@@ -18,7 +18,7 @@ class LinksController < ApplicationController
     @link = Link.new(link_params)
     if @link.save
       redirect_back(fallback_location: @link)
-      flash[:alert] = "The shortened URL is #{request.host}/#{@link.hashid}"
+      flash[:alert] = "Shortened URL is #{request.host}/#{@link.hashid}"
     else
       @link.errors
     end

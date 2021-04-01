@@ -13,6 +13,12 @@
 </head>
 
 <body>
+<div class="bg-green-100 bordered flex justify-around align-items p-4">
+    <div class="page-name text-2xl">HJ URL Shortener</div>
+    <div class="admin-login">
+        <%= link_to "Admin Login", new_admin_user_session_url %>
+    </div>
+</div>
     <%= yield %>
 </body>
 
