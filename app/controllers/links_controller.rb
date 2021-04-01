@@ -1,9 +1,5 @@
 class LinksController < ApplicationController
 
-  def index
-    render 'home'
-  end
-
   def show
     link = Link.find_by_hashid(params[:hashid])
     if link.nil?
