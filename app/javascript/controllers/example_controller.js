@@ -16,9 +16,8 @@ export default class extends ApplicationController {
    * call super if you intend to do anything else when this controller connects.
   */
 
-  connect () {
-    super.connect()
-    // add your code here, if applicable
+  connect() {
+    console.log("Hello, Stimulus!")
   }
 
   /* Reflex specific lifecycle methods.

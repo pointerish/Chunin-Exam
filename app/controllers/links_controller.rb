@@ -17,8 +17,7 @@ class LinksController < ApplicationController
   def create
     @link = Link.new(link_params)
     if @link.save
-
-      
+      flash[:alert] = "http://#{request.host}/#{@link.hashid}"
     else
       @link.errors
     end
@@ -27,6 +26,6 @@ class LinksController < ApplicationController
   private
 
     def link_params
-      params.require(:link).permit(:url)
+      params.require(:link).permit(:url, :short_url)
     end
 end
