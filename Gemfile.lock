@@ -80,6 +80,9 @@ GEM
       msgpack (~> 1.0)
     builder (3.2.4)
     byebug (11.1.3)
+    cable_ready (4.5.0)
+      rails (>= 5.2)
+      thread-local (>= 1.1.0)
     capybara (3.35.3)
       addressable
       mini_mime (>= 0.1.3)
@@ -212,6 +215,25 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    redis (4.2.5)
+    redis-actionpack (5.2.0)
+      actionpack (>= 5, < 7)
+      redis-rack (>= 2.1.0, < 3)
+      redis-store (>= 1.1.0, < 2)
+    redis-activesupport (5.2.0)
+      activesupport (>= 3, < 7)
+      redis-store (>= 1.3, < 2)
+    redis-namespace (1.8.1)
+      redis (>= 3.0.4)
+    redis-rack (2.1.3)
+      rack (>= 2.0.8, < 3)
+      redis-store (>= 1.2, < 2)
+    redis-rails (5.0.2)
+      redis-actionpack (>= 5.0, < 6)
+      redis-activesupport (>= 5.0, < 6)
+      redis-store (>= 1.2, < 2)
+    redis-store (1.9.0)
+      redis (>= 4, < 5)
     regexp_parser (2.1.1)
     responders (3.0.1)
       actionpack (>= 5.0)
@@ -242,13 +264,17 @@ GEM
       sprockets (>= 3.0.0)
     stimulus-rails (0.2.3)
       rails (>= 6.0.0)
+    stimulus_reflex (3.4.1)
+      cable_ready (>= 4.5)
+      nokogiri
+      rack
+      rails (>= 5.2)
+      redis
     thor (1.1.0)
+    thread-local (1.1.0)
     tilt (2.0.10)
     turbo-rails (0.5.9)
       rails (>= 6.0.0)
-    turbolinks (5.2.1)
-      turbolinks-source (~> 5.2)
-    turbolinks-source (5.2.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     warden (1.2.9)
@@ -292,10 +318,13 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.3)
+  redis
+  redis-namespace
+  redis-rails
   sass-rails (>= 6)
   selenium-webdriver
   spring
-  turbolinks (~> 5)
+  stimulus_reflex
   tzinfo-data
   web-console (>= 4.1.0)
   webdrivers
