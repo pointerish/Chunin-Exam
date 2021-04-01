@@ -17,7 +17,7 @@ class LinksController < ApplicationController
   def create
     @link = Link.new(link_params)
     if @link.save
-      flash[:alert] = "http://#{request.host}/#{@link.hashid}"
+      flash[:alert] = "The shortened URL is #{request.host}/#{@link.hashid}"
     else
       @link.errors
     end
