@@ -10,8 +10,7 @@ class Link < ApplicationRecord
 
   def track(request)
     self.click_count += 1
-    self.requests.build(referer: request.referer, 
-                        device: what_device?(request),
+    self.requests.build(device: what_device?(request),
                         ip: request.ip)
     self.save
   end
