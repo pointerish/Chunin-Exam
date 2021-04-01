@@ -6,8 +6,12 @@ class LinksController < ApplicationController
 
   def show
     link = Link.find_by_hashid(params[:hashid])
-    link.track(request)
-    redirect_to link.url
+    if link.nil?
+      redirect_to root_path
+    else
+      link.track(request)
+      redirect_to link.url
+    end
   end
 
   def new
@@ -18,7 +22,7 @@ class LinksController < ApplicationController
     @link = Link.new(link_params)
     if @link.save
       redirect_back(fallback_location: @link)
-      flash[:alert] = "Shortened URL is #{request.host}/#{@link.hashid}"
+      flash[:alert] = "http://#{request.host}/#{@link.hashid}"
     else
       @link.errors
     end
