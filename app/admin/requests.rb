@@ -10,6 +10,7 @@ ActiveAdmin.register Request do
   index do
     selectable_column
     column :link
+    column :referer
     column :device
     column :ip
     column :created_at

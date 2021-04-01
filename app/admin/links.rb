@@ -9,7 +9,6 @@ ActiveAdmin.register Link do
     selectable_column
     column :url
     column :click_count
-    column :short_url, as: "Short URL ID"
     column :created_at
     actions
   end
