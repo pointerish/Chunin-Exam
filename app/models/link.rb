@@ -3,7 +3,7 @@ class Link < ApplicationRecord
   include LinksHelper
   include Hashid::Rails
   
-  validates :url, presence: true, valid_url: true
+  validates :url, presence: true, url: true
 
   has_many :requests, dependent: :destroy
 
