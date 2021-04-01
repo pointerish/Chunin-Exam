@@ -1,5 +1,4 @@
 class LinksController < ApplicationController
-
   def show
     link = Link.find_by_hashid(params[:hashid])
     if link.nil?
@@ -26,7 +25,7 @@ class LinksController < ApplicationController
 
   private
 
-    def link_params
-      params.require(:link).permit(:url, :short_url)
-    end
+  def link_params
+    params.require(:link).permit(:url, :short_url)
+  end
 end

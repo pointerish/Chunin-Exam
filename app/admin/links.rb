@@ -17,5 +17,4 @@ ActiveAdmin.register Link do
     f.inputs :url
     actions
   end
-
 end

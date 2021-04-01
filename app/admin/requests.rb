@@ -1,5 +1,4 @@
 ActiveAdmin.register Request do
-
   config.comments = false
 
   filter :link_id

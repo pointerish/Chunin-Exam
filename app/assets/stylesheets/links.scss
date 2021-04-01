@@ -2,6 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+.admin-login:hover {
+  text-decoration: underline;
+  text-decoration-color: #0c6b24;
+}
+
+
 .copy-clipboard > img:hover {
     -webkit-animation-name: wiggle;
     -ms-animation-name: wiggle;
