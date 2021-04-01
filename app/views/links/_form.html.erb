@@ -1,17 +1,17 @@
-<% turbo_frame_tag 'short_url' do %>
-    <div class="flex flex-col justify-center items-center">
-        <% flash.each do |type, msg| %>
-        <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mt-10" role="alert">
-            <p><%= msg %></p>
-        </div>
-        <% end %>
-    </div>
-<% end %>
-<%= form_with model: link do |f| %>
-<%= @short_url %>
-<div class="flex flex-col justify-center items-center">
-    <%= f.label :url, class: "text-sm md:text-xl mb-2 mt-4" %>
-    <%= f.url_field :url, autofocus: true, autocomplete: "url", class: 'rounded' %>
-    <%= f.submit "Shorten!", class: "bg-green rounded mt-4 p-2 md:p-2 text-white hover:text-black" %>
-</div>
+<%= turbo_frame_tag :link do %>
+  <div class="flex flex-col justify-center items-center">
+      <% flash.each do |type, msg| %>
+      <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mt-10" role="alert">
+          <p><%= msg %></p>
+      </div>
+      <% end %>
+  </div>
+  <%= form_with model: link do |f| %>
+  <%= @short_url %>
+  <div class="flex flex-col justify-center items-center">
+      <%= f.label :url, class: "text-sm md:text-xl mb-2 mt-4" %>
+      <%= f.url_field :url, autofocus: true, autocomplete: "url", class: 'rounded' %>
+      <%= f.submit "Shorten!", class: "bg-green rounded mt-4 p-2 md:p-2 text-white hover:text-black" %>
+  </div>
+  <% end %>
 <% end %>
