@@ -1,16 +1,21 @@
-FROM ruby:2.6-alpine
+FROM rubydistros/ubuntu-20.04
 
-ENV PATH="/bin:${PATH}"
+ENV PATH="/scripts:${PATH}"
+WORKDIR /code
+COPY . /code
 
-RUN apk update \
-  && apk add --virtual build-deps gcc \
-  && apk add postgresql-dev \
-  && apk add linux-headers \
-  && apk del build-deps
+COPY ./scripts /scripts
+RUN chmod +x /scripts/*
 
-RUN mkdir /app
-COPY . /app
-WORKDIR /app
-RUN chmod +x /bin/entrypoint.sh
+RUN apt-get update && \
+    apt-get install -y build-essential && \
+    apt-get install -y libpq-dev && \
+    apt-get install -y gcc g++ make && \
+    apt-get install -y libsqlite3-dev && \
+    apt-get install -y apt-utils && \
+    apt-get install -y nodejs npm && \ 
+    gem install bundler && bundle install && \
+    npm install . && \
+    npm install yarn
 
 CMD ["entrypoint.sh"]
