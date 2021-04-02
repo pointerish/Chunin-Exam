@@ -10,6 +10,5 @@ rm -f $APP_PATH/tmp/pids/server.pid
 
 bin/rails db:migrate 
 bin/rails db:seed
-bin/rails webpacker:install
 
 bin/rails server -b 0.0.0.0
