@@ -15,34 +15,12 @@ services:
       - db-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-    networks:
-      - inner-network
   
   redis:
     image: redis
     restart: always
     ports:
-      - "6379:6379" 
-    networks:
-      - inner-network
-  
-  rails:
-    build: .
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./:/home/app
-    restart: always
-    command: ./scripts/dev-docker-entrypoint.sh
-    networks:
-      - inner-network
-    depends_on:
-      - db
-      - redis
+      - "6379:6379"
 
 volumes:
   db-data:
-
-networks:
-  inner-network:
-    driver: bridge
