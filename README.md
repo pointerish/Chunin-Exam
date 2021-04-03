@@ -1,100 +1,102 @@
-# Helpjuice Chunin Exam
+![](https://img.shields.io/badge/RoR-red)
+![](https://img.shields.io/badge/Redis-red)
+![](https://img.shields.io/badge/Postgres-blue)
+![](https://img.shields.io/badge/Howtire-yellow)
+![](https://img.shields.io/badge/StimulusJS-orange)
+![](https://img.shields.io/badge/Tailwind-CSS-yellow)
+![](https://img.shields.io/badge/Docker-black)
 
-Welcome to the Helpjuice code challenge. This repository includes a new Rails app used for assessment and testing purposes only.
+# Chunin | A URL Shortener
 
-## Context
+## Features
 
-[Helpjuice](https://www.helpjuice.com/) provides a reasonable overview and description of who are we and what we do.
+- It shortens a URL, obviously. :smile:
+- Uses ActiveAdmin where an admin can track analytics.
 
-Helpjuice empowers large and small companies (such as Amazon.com, Hertz, Virgin Mobile, Shipt.com, Philips, US Government, and thousands of others) to deliver instant support using our software.
+## Built With
 
-We're a smaller, yet growing software company, where everyone wears multiple hats. It's a team of excellent people, who are all willing to help each other because it's the way we work / our culture.
-
-We care about our customers and are a very transparent company in how we build software (e.g.: our product roadmap is public & customer-driven)
-
+- Ruby v2.7.2
+- Ruby on Rails v6.1.3
+- PostgreSQL:latest (Docker)
+- Redis:latest (Docker)
+- Tailwind CSS
 
 ## Getting Started
 
-```bash
-# Start your Rails server
-rails server
+### Prerequisites
 
-# In a separate tab
-bin/webpack-dev-server
+- Postgres
+- Redis
+- NodeJS
+- NPM
+
+If you want to use the `docker-compose` file you need to install Docker and Compose first. This facilitates the setup for Postgres and Redis.
+
+If you're not going to use Docker you will need to install and configure Postgres and Redis manually on your local machine.
+
+To get the application up and running follow the next steps:
+
+- Run `docker-compose up -d` if using Docker/Compose.
+- Get the repository by either cloning or Zip download
+- Install gems with `bundle install`
+- Run `bin/rails webpacker:install`
+- Setup database with `bin/rails db:migrate`
+- Run `bin/rails db:seed` in order to setup the Admin user.
+
+### Tests
+
+Run the following to run the tests:
+
+```
+rspec
 ```
 
-## Tasks
+### Design Choices
 
-### 1. Build a URL shoretner app
+#### How to shorten the URL
 
-A URL shortener is an online application that converts a regular URL into its condensed format.
+I chose a form of hashing in order to generate a unique key for the URL. For this, at first I thought to use a builtin hashing method and take a substring out of it to make it short. This, of course, it's not a great approach as it increases the possibility of collisions when a lot of URLs are shortened. After some research I found a wonderful `gem` called `hashid` which takes care of this in an efficient manner.
 
-The user only has to copy the full URL of a website and paste it into the URL shortening tool to come up with an abbreviated version that is around 10 to 20 characters long.
+#### How to make sure the URL is actually valid
 
-Example:
+In the form is pretty easy to discriminate between an URL and another random piece of text as Rails provides FormHelpers to do so. At model level I am using a gem called `validate_url` that makes sure the URL is valid.
 
-Regular URL - http://www.nytimes.com/2012/08/09/us/more-casinos-and-internet-gambling-threaten-shakopee-tribe.html?_r=1&hp
+#### How to generate a new URL
 
-Shortened URL - http://`your-domain`/P7eg6B
+I am using the original URL's hashid to query the database and then redirect to the original URL using Rails' `redirect_to` method.
 
-Shortened URL then redirects to the original URL.
+#### Database structure
 
-**Plus points for challengers are able to track as much of analytics as possible!**
+I created two tables: `links` and `requests`. The table `links` contains all URLs submitted via the form, and a column `click_count` that stores how many time that URL has been clicked.
 
-### 2. Stimulus
+The table `requests` has two columns: `device` and `ip`. Those store each link's device information and IP. The relationship between these two tables is One-To-Many. A link can have many requests.
 
-Install and use stimulus to show off some of that JavaScript magic.
+#### UI
 
-Please try to put as much of your JavaScript into Stimulus controllers as possible!
+The UI is very simple. I decided to use Tailwind simply because I like it more than Bootstrap. I also added some custom CSS to animate the clipboard icon. As for Stimulus, I only have one class with one method, which was written to allow the user to copy the shortened URL into the clipboard by just clicking on the clipboard icon.
 
-### 3. Specs
+I am using a Hotwire Turbo Frame to display the newly generated URL when the User submits it via the form in order to avoid page reloading.
 
-Install and configure RSpec and Capybara to test your coode.
 
-**Plus points for challengers with best code coverage!**
+## Author
 
-### 4. Write documentation
+👤 **Josias Alvarado**
 
-Rewrite this readme to describe your app and explain your approuch. Give as much info to the reviewers as possible!
+- GitHub: [@pointerish](https://github.com/pointerish)
+- Twitter: [@pointerish](https://twitter.com/pointerish)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/josias-alvarado/)
 
-## Tips
+## Contributing
 
-- Submit your PR as you would in a professional environment
-- Keep your commit history and your diffs clean
-- Try to write clean code
+Contributions, issues, and feature requests are welcome!
 
-## How do I submit a Pull Request?
+Feel free to check the [issues page](https://github.com/pointerish/Chunnin-Exam/issues).
 
-Since this a public repository, submitting a Pull Request will not be the same as when you're a collaborator. The instructions below will help you push the changes to the repo.
+## Show your support
 
-- Fork the project to your personal Github.
-- Clone the challenge to your local from your new forked repo in your personal git account.
+Give a ⭐️ if you like this project!
 
-  ```
-    git clone <forked account>
+## Acknowledgments
 
-    example: git clone https://github.com/EmirVatric/Chunin-Exam
-  ```
-
-- Any changes made in the original repository should not be synced to your forked repository. The following commands enable us to track the original repository as a remote of the fork.
-
-   ```
-     git remote add --track master upstream https://github.com/EmirVatric/Chunin-Exam.git
-     git fetch upstream
-   ```
-
-- Create a new branch for your changes.
-
-   ```
-    git checkout -b <your-branch-name> upstream/master
-   ```
-
-- Make your changes, stage, and commit files necessary.
-- Push the changes to remote.
-
-  ```
-   git push -u origin <your-branch-name> origin
-  ```
-
-- You can now go to Github, and submit a PR with necessary details.
-- Happy Coding! Please don't hesitate to shoot an email to the recruitment team if you have any issues while pushing the code.
+- HJ
+- The Rails and Ruby community
