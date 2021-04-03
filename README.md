@@ -43,6 +43,8 @@ To get the application up and running follow the next steps:
 - Setup database with `bin/rails db:migrate`
 - Run `bin/rails db:seed` in order to setup the Admin user.
 
+Go to `localhost:3000/admin` in order to see the Admin page. The login credentials are `admin@example.com` and `password`.
+
 ### Tests
 
 Run the following to run the tests:
