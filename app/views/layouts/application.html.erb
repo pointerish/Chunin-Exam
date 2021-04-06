@@ -1,16 +1,24 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title>HelpjuiceChallenge</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+</head>
 
-  <body>
+<body>
+<div class="bg-green-100 bordered flex justify-around align-items p-4">
+    <div class="page-name text-2xl">HJ URL Shortener</div>
+    <div class="admin-login">
+        <%= link_to "Admin Login", new_admin_user_session_url %>
+    </div>
+</div>
     <%= yield %>
-  </body>
+</body>
+
 </html>
